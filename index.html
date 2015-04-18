@@ -5,28 +5,49 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!-- Bootstrap -->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+        <!-- GeoFire -->
+        <script src="https://cdn.firebase.com/libs/geofire/3.2.2/geofire.min.js"></script>
         <link href="css/leaderboard.css" rel="stylesheet" />
     </head>
     <body>
         <div class="container" ng-controller="MainCtrl as main">
-            <h3>Race to Awesome</h3>
+            <h3>Parking Garage</h3>
+            <div class="well">
+              <form class="form-inline" role="form" novalidate ng-submit="main.computeLatLong()">
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Enter Address">
+                      <input type="text" class="form-control" placeholder="Within how many miles">
+                  </div>
+                  <button type="submit" class="btn btn-default">Enter Address</button>
+                  <button type="button" class="btn btn-default">Use Current Location</button>
+
+            </div>
             <div class="well">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Lane</th>
-                        <th>Contestant</th>
-                        <th>Score</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Open Spaces</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="contestant in main.contestants">
-                        <td>{{contestant.lane}}</td>
-                        <td>{{contestant.name}}</td>
-                        <td>{{contestant.score}}</td>
+                    <tr ng-repeat="garage in main.garages">
+                        <td>{{garage.friendlyName}}</td>
+                        <td>{{garage.points[0]}} {{garage.points[1]}}</td>
+                        <td>{{garage.open_spaces}}</td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+            <style type="text/css">
+                #map_canvas{
+                    height:400px;
+                    width: 100%;
+                }
+            </style>
+            <div id="map_canvas">
             </div>
         </div>
 
@@ -39,5 +60,6 @@
         <script src="//cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 
         <script src="js/leader-board.js"></script>
+        <script src="sf_parking.js"></script>
     </body>
 </html>

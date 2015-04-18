@@ -26,7 +26,6 @@
             });
         });
 
-
         myLatlng = new google.maps.LatLng(center[0], center[1]);
         map.setCenter(myLatlng);
 
