@@ -1,13 +1,13 @@
 var app = angular.module('leaderboard', ['firebase']);
 
-app.constant('FIREBASE_URI', 'PUT_YOUR_FIREBASE_HERE');
+app.constant('FIREBASE_URI', 'https://hackorama.firebaseio.com/');
 
-app.controller('MainCtrl', function (ContestantsService) {
+app.controller('MainCtrl', function (GaragesService) {
     var main = this;
     main.newContestant = {lane: '', name: '', score: ''};
     main.currentContestant = null;
-    main.contestants = ContestantsService.getContestants();
-
+    main.garages = GaragesService.getGarages();
+/*
     main.addContestant = function () {
         ContestantsService.addContestant(angular.copy(main.newContestant));
         main.newContestant = {lane: '', name: '', score: ''};
@@ -30,15 +30,17 @@ app.controller('MainCtrl', function (ContestantsService) {
         main.currentContestant.score = parseInt(main.currentContestant.score, 10) - 1;
         main.updateContestant(main.currentContestant);
     };
+    */
 });
 
-app.service('ContestantsService', function ($firebaseArray, FIREBASE_URI) {
+app.service('GaragesService', function ($firebaseArray, FIREBASE_URI) {
     var service = this;
-    var ref = new Firebase(FIREBASE_URI);
-    var contestants = $firebaseArray(ref);
+    var ref = new Firebase('https://publicdata-parking.firebaseio.com/san_francisco/garages');
+    var garages = $firebaseArray(ref);
 
-    service.getContestants = function () {
-        return contestants;
+    service.getGarages = function () {
+        console.log (garages);
+        return garages;
     };
 
     service.addContestant = function (contestant) {
