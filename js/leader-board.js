@@ -1,12 +1,15 @@
-var app = angular.module('leaderboard', ['firebase']);
+var app = angular.module('leaderboard', ['firebase', 'parking']);
 
 app.constant('FIREBASE_URI', 'https://hackorama.firebaseio.com/');
 
-app.controller('MainCtrl', function (GaragesService) {
+app.controller('MainCtrl', function (GaragesService, Map) {
     var main = this;
     main.newContestant = {lane: '', name: '', score: ''};
     main.currentContestant = null;
     main.garages = GaragesService.getGarages();
+    // main.garageList = Map.geoQueryGarages;
+
+    Map.start(main);
 /*
     main.addContestant = function () {
         ContestantsService.addContestant(angular.copy(main.newContestant));
