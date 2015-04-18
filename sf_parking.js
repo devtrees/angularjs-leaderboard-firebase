@@ -10,8 +10,21 @@
     center = [37.78565219391501, -122.4058404513338];
 
     function start() {
-        var con, mag, continent, circleLoc, circle, circleOptions, geoFireGarages, geoFireStreets, geoQueryGarages, geoQueryStreets, myLatlng, previousInfowindow;
+        var con, mag, continent, circleLoc, circle, circleOptions, geoFireGarages, geoFireStreets, geoQueryGarages, geoQueryStreets, myLatlng, previousInfowindow, address, geocoder;
         map = new google.maps.Map(document.getElementById('map_canvas'), {zoom: 15});
+        google.maps.visualRefresh = true;
+
+        geocoder = new google.maps.Geocoder();
+
+
+        var address = {{main.currentAddress}}
+
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+        });
 
         myLatlng = new google.maps.LatLng(center[0], center[1]);
         map.setCenter(myLatlng);
