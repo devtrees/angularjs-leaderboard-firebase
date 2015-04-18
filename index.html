@@ -11,14 +11,13 @@
         <div class="container" ng-controller="MainCtrl as main">
             <h3>Parking Garage</h3>
             <div class="well">
-              <h4>Add Contestant</h4>
-              <form class="form-inline" role="form" novalidate ng-submit="main.addContestant()">
+              <form class="form-inline" role="form" novalidate ng-submit="main.computeLatLong()">
                   <div class="form-group">
-                      <input type="text" class="form-control" ng-model="main.newContestant.lane" placeholder="Enter Address">
-                      <input type="text" class="form-control" ng-model="main.newContestant.lane" placeholder="Within how many miles">
+                      <input type="text" class="form-control" placeholder="Enter Address">
+                      <input type="text" class="form-control" placeholder="Within how many miles">
                   </div>
                   <button type="submit" class="btn btn-default">Enter Address</button>
-                  <button type="submit" class="btn btn-default">Use Current Location</button>
+                  <button type="button" class="btn btn-default">Use Current Location</button>
 
             </div>
             <div class="well">
